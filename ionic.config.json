@@ -1,0 +1,7 @@
+{
+  "name": "bikeshare-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
