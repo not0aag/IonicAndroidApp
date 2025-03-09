@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Native Features</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngIf="message">
+    <ion-card-header>
+      <ion-card-subtitle>Received Message</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text color="primary">
+        <p>{{ message }}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-title>
+        <ion-icon
+          name="phone-portrait-outline"
+          class="ion-margin-end"
+        ></ion-icon>
+        Device Information
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="full">
+        <ion-item>
+          <ion-label>Model</ion-label>
+          <ion-note slot="end">{{ deviceInfo.model }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Platform</ion-label>
+          <ion-note slot="end">{{ deviceInfo.platform }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Version</ion-label>
+          <ion-note slot="end">{{ deviceInfo.version }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Manufacturer</ion-label>
+          <ion-note slot="end">{{ deviceInfo.manufacturer }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Is Virtual Device</ion-label>
+          <ion-note slot="end"
+            >{{ deviceInfo.isVirtual ? 'Yes' : 'No' }}</ion-note
+          >
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="secondary">
+      <ion-card-title>
+        <ion-icon name="wifi-outline" class="ion-margin-end"></ion-icon>
+        Network Information
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Connection Type</ion-label>
+        <ion-badge
+          slot="end"
+          [color]="networkType === 'disconnected' ? 'danger' : 'success'"
+        >
+          {{ networkType }}
+        </ion-badge>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="success">
+      <ion-card-title>
+        <ion-icon name="battery-full-outline" class="ion-margin-end"></ion-icon>
+        Battery Status
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Battery Level</ion-label>
+        <ion-progress-bar
+          [value]="batteryLevel/100"
+          [color]="batteryLevel > 20 ? 'success' : 'danger'"
+        ></ion-progress-bar>
+        <ion-note slot="end" class="ion-margin-start"
+          >{{ batteryLevel }}%</ion-note
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label>Charging Status</ion-label>
+        <ion-badge slot="end" [color]="batteryPlugged ? 'success' : 'medium'">
+          {{ batteryPlugged ? 'Plugged In' : 'Not Charging' }}
+        </ion-badge>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

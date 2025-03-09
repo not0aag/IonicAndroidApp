@@ -1,17 +1,106 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+  <ion-toolbar color="secondary">
+    <ion-title> Bike Details </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card *ngIf="stationDetails">
+    <ion-card-header>
+      <ion-card-title>{{ stationDetails.stationName }}</ion-card-title>
+      <ion-card-subtitle>
+        <ion-badge
+          [color]="stationDetails.statusValue === 'In Service' ? 'success' : 'danger'"
+        >
+          {{ stationDetails.statusValue }}
+        </ion-badge>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="full">
+        <ion-item>
+          <ion-label>Station ID</ion-label>
+          <ion-note slot="end" color="primary"
+            >{{ stationDetails.id }}</ion-note
+          >
+        </ion-item>
+        <ion-item>
+          <ion-label>Available Bikes</ion-label>
+          <ion-note slot="end" color="success"
+            >{{ stationDetails.availableBikes }}</ion-note
+          >
+        </ion-item>
+        <ion-item>
+          <ion-label>Available Docks</ion-label>
+          <ion-note slot="end" color="tertiary"
+            >{{ stationDetails.availableDocks }}</ion-note
+          >
+        </ion-item>
+        <ion-item>
+          <ion-label>Total Docks</ion-label>
+          <ion-note slot="end">{{ stationDetails.totalDocks }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>City</ion-label>
+          <ion-note slot="end">{{ stationDetails.city }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Location</ion-label>
+          <ion-note slot="end"
+            >{{ stationDetails.latitude }}, {{ stationDetails.longitude
+            }}</ion-note
+          >
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-card *ngIf="!stationDetails">
+    <ion-card-header>
+      <ion-card-title>No Station Selected</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Please select a station from the BikeShare tab.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Send Message</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Enter a message</ion-label>
+        <ion-input
+          [(ngModel)]="newMessage"
+          placeholder="Type your message here"
+        ></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="sendMessage()" class="ion-margin-top">
+        <ion-icon name="send" slot="start"></ion-icon>
+        Send Message
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="receivedMessage">
+    <ion-card-header>
+      <ion-card-subtitle>Received Message</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text color="primary">
+        <p>{{ receivedMessage }}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button
+    expand="block"
+    routerLink="/native"
+    color="tertiary"
+    class="ion-margin-top"
+  >
+    <ion-icon name="phone-portrait" slot="start"></ion-icon>
+    Go to Native Features
+  </ion-button>
 </ion-content>

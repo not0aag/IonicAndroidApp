@@ -1,17 +1,39 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+  <ion-toolbar color="primary">
+    <ion-title> Toronto BikeShare </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>BikeShare Stations</ion-card-title>
+      <ion-card-subtitle>Select a station to view details</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Select a Station</ion-label>
+        <ion-select
+          [(ngModel)]="selectedStation"
+          (ionChange)="onStationSelected()"
+          interface="popover"
+        >
+          <ion-select-option *ngFor="let name of stationNames" [value]="name">
+            {{ name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card *ngIf="message">
+    <ion-card-header>
+      <ion-card-subtitle>Message from other components</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text color="primary">
+        <p>{{ message }}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
